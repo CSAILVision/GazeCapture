@@ -29,7 +29,7 @@ Booktitle = {IEEE Conference on Computer Vision and Pattern Recognition (CVPR)}
 ```
 
 ## Data
-We include data for 1474 unique subjects. Each numbered directory represents a recording session from one of those subjects. Numbers were assigned sequentially, although some numbers are missing for various reasons (e.g., test recordings, duplicate subjects, or incomplete uploads).
+The dataset can be downloaded at the [project website](http://gazecapture.csail.mit.edu/download.php). In the dataset, we include data for 1474 unique subjects. Each numbered directory represents a recording session from one of those subjects. Numbers were assigned sequentially, although some numbers are missing for various reasons (e.g., test recordings, duplicate subjects, or incomplete uploads).
 
 Inside each directory is a collection of sequentially-numbered images (in the `frames` subdirectory) and JSON files for different pieces of metadata, described below. Many of the variables in the JSON files are arrays, where each element is associated with the frame numbered the same as the index.
 
