@@ -93,14 +93,4 @@ In the `models` directory, we provide files compatible with [Caffe](http://caffe
 We provide some sample code to help you get started using the dataset. See individual files for documentation.
 
 ## Contact
-Questions related to this dataset may be emailed to gazecapture@gmail.com. You may also reach the authors at their email addresses in the paper:
-
-| Name                 | Email                  |
-|----------------------|------------------------|
-| Kyle Krafka          | krafka@cs.uga.edu      |
-| Aditya Khosla        | khosla@csail.mit.edu   |
-| Petr Kellnhofer      | pkellnho@csail.mit.edu |
-| Harini Kannan        | hkannan@csail.mit.edu  |
-| Suchendra Bhandarkar | suchi@cs.uga.edu       |
-| Wojciech Matusik     | wojciech@csail.mit.edu |
-| Antonio Torralba     | torralba@csail.mit.edu |
+Questions related to this dataset may be emailed to [gazecapture@gmail.com](mailto:gazecapture@gmail.com).
