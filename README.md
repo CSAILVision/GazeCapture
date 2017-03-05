@@ -14,7 +14,7 @@ Continue reading for more information on each part.
 ## History
 Any necessary changes to the dataset will be documented here.
 
-* **January 2017**: Original dataset release.
+* **March 2017**: Original dataset release.
 
 ## Usage
 Usage of this dataset (including all data, models, and code) is subject to the associated license, found in LICENSE.md. We also ask that you cite the associated paper if you make use of this dataset; following is the BibTeX entry:
@@ -29,7 +29,7 @@ Booktitle = {IEEE Conference on Computer Vision and Pattern Recognition (CVPR)}
 ```
 
 ## Data
-The dataset can be downloaded at the [project website](http://gazecapture.csail.mit.edu/download.php). In the dataset, we include data for 1474 unique subjects. Each numbered directory represents a recording session from one of those subjects. Numbers were assigned sequentially, although some numbers are missing for various reasons (e.g., test recordings, duplicate subjects, or incomplete uploads).
+We include data for 1474 unique subjects. Each numbered directory represents a recording session from one of those subjects. Numbers were assigned sequentially, although some numbers are missing for various reasons (e.g., test recordings, duplicate subjects, or incomplete uploads).
 
 Inside each directory is a collection of sequentially-numbered images (in the `frames` subdirectory) and JSON files for different pieces of metadata, described below. Many of the variables in the JSON files are arrays, where each element is associated with the frame numbered the same as the index.
 
@@ -82,6 +82,7 @@ A stream of motion data (accelerometer, gyroscope, and magnetometer) recorded at
 
 ## Models
 In the `models` directory, we provide files compatible with [Caffe](http://caffe.berkeleyvision.org/), the deep learning framework. Following are descriptions of the included files:
+
 - *itracker_train_val.prototxt*: The iTracker architecture. See comments in the file for more information.
 - *itracker_deploy.prototxt*: The iTracker architecture expressed in a format suitable for inference (whereas itracker_train_val.prototxt is used for training).
 - *itracker_solver.prototxt*: The solver configuration describing how to train the model.
@@ -90,7 +91,27 @@ In the `models` directory, we provide files compatible with [Caffe](http://caffe
 - *snapshots/itracker25x_iter_92000.caffemodel*: Model parameters after having trained 92,000 iterations, using the 25x augmented dataset.
 
 ## Code
-We provide some sample code to help you get started using the dataset. See individual files for documentation.
+We provide some sample code to help you get started using the dataset. Below is a high-level overview, but see individual files for more documentation. Most files are MATLAB scripts/functions.
+
+- `loadSubject.m`, `loadAllSubjects.m`: Loads metadata from JSON files into MATLAB structs. This requires the [gason MATLAB wrapper](https://github.com/pdollar/coco/tree/master/MatlabAPI) to parse JSON. Note that this struct format is currently only used in a few scripts; others expect same-sized vectors for each piece of metadata and will require some data processing.
+- `generateCrops.m`: This will generate the cropped face and eye images required to train iTracker. You must edit the script path to point to the root of the dataset. New images will be saved in subdirectories under each subject.
+- `cropRepeatingEdge.m`: Crops an image, repeating edges if the cropped area goes outside of the original image bounds. (Face bounding boxes sometimes extend beyond the frame.) We use this script to mimic the behavior of [imageByClampingToExtent](https://developer.apple.com/reference/coreimage/ciimage/1437628-imagebyclampingtoextent), which we used in the GazeCapture app, and to provide something more natural than black pixels when training the network with fixed-size centered face images.
+- `cam2screen.m`, `screen2cam.m`, `cm2pts.m`, `pts2cm.m`: Transformation functions to move between iOS measurements (points), metric measurements (centimeters), and our prediction space. Measurements in the GazeCapture dataset are already included in different formats, but these will be useful for additional processing.
+- `apple_device_data.csv`, `loadAppleDeviceData.m`: The CSV file includes measurements we use to determine the position of the center of the camera relative to the screen. We derived these measurements from Apple's Device Dimensional Drawings in their [Accessory Design Guidelines (PDF)](https://developer.apple.com/accessories/Accessory-Design-Guidelines.pdf). The script can be used to load this CSV into your MATLAB workspace.
+- `faceGridFromParams.m`: Transform the compact, parameterized version of the face grid (included in metadata) into the actual feature representation (flattened binary mask) used in iTracker.
+- `faceGridFromFaceRect.m`: Generate a face grid (either parameterized or the full representation) given a face bounding box within a frame. Parameterized face grids are already included in the metadata, but this is useful if you have new face detections to use.
+
+Please feel free to contact us if you find any issues with these scripts or would like to request any additional code.
 
 ## Contact
-Questions related to this dataset may be emailed to [gazecapture@gmail.com](mailto:gazecapture@gmail.com).
+Questions related to this dataset may be emailed to gazecapture@gmail.com. You may also reach the authors at their email addresses in the paper:
+
+| Name                 | Email                  |
+|----------------------|------------------------|
+| Kyle Krafka          | krafka@cs.uga.edu      |
+| Aditya Khosla        | khosla@csail.mit.edu   |
+| Petr Kellnhofer      | pkellnho@csail.mit.edu |
+| Harini Kannan        | hkannan@csail.mit.edu  |
+| Suchendra Bhandarkar | suchi@cs.uga.edu       |
+| Wojciech Matusik     | wojciech@csail.mit.edu |
+| Antonio Torralba     | torralba@csail.mit.edu |
