@@ -29,7 +29,7 @@ Booktitle = {IEEE Conference on Computer Vision and Pattern Recognition (CVPR)}
 ```
 
 ## Data
-We include data for 1474 unique subjects. Each numbered directory represents a recording session from one of those subjects. Numbers were assigned sequentially, although some numbers are missing for various reasons (e.g., test recordings, duplicate subjects, or incomplete uploads).
+The dataset can be downloaded at the [project website](http://gazecapture.csail.mit.edu/download.php). In the dataset, we include data for 1474 unique subjects. Each numbered directory represents a recording session from one of those subjects. Numbers were assigned sequentially, although some numbers are missing for various reasons (e.g., test recordings, duplicate subjects, or incomplete uploads).
 
 Inside each directory is a collection of sequentially-numbered images (in the `frames` subdirectory) and JSON files for different pieces of metadata, described below. Many of the variables in the JSON files are arrays, where each element is associated with the frame numbered the same as the index.
 
@@ -104,14 +104,4 @@ We provide some sample code to help you get started using the dataset. Below is 
 Please feel free to contact us if you find any issues with these scripts or would like to request any additional code.
 
 ## Contact
-Questions related to this dataset may be emailed to gazecapture@gmail.com. You may also reach the authors at their email addresses in the paper:
-
-| Name                 | Email                  |
-|----------------------|------------------------|
-| Kyle Krafka          | krafka@cs.uga.edu      |
-| Aditya Khosla        | khosla@csail.mit.edu   |
-| Petr Kellnhofer      | pkellnho@csail.mit.edu |
-| Harini Kannan        | hkannan@csail.mit.edu  |
-| Suchendra Bhandarkar | suchi@cs.uga.edu       |
-| Wojciech Matusik     | wojciech@csail.mit.edu |
-| Antonio Torralba     | torralba@csail.mit.edu |
+Questions related to this dataset may be emailed to [gazecapture@gmail.com](mailto:gazecapture@gmail.com).
