@@ -17,7 +17,7 @@ Any necessary changes to the dataset will be documented here.
 * **March 2017**: Original dataset release.
 
 ## Usage
-Usage of this dataset (including all data, models, and code) is subject to the associated license, found in LICENSE.md. 
+Usage of this dataset (including all data, models, and code) is subject to the associated license, found in [LICENSE.md](LICENSE.md). 
 
 [![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](http://creativecommons.org/licenses/by-nc-sa/4.0/)
 
