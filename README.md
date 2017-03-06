@@ -18,6 +18,7 @@ Any necessary changes to the dataset will be documented here.
 
 ## Usage
 Usage of this dataset (including all data, models, and code) is subject to the associated license, found in LICENSE.md. 
+
 [![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](http://creativecommons.org/licenses/by-nc-sa/4.0/)
 
 We also ask that you cite the associated paper if you make use of this dataset; following is the BibTeX entry:
