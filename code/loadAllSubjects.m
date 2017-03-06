@@ -8,7 +8,9 @@ subjects = [];
 
 subjectDirs = dir(base_data_path);
 for subjectDir = subjectDirs'
-    if ~subjectDir.isdir || subjectDir.name(1) == '.'
+    % Valid subject directories have five-digit numbers.
+    if ~currSubject.isdir || length(currSubject.name) ~= 5 || ...
+            ~all(isstrprop(currSubject.name, 'digit'))
         continue;
     end
     s = loadSubject(fullfile(base_data_path,subjectDir.name));

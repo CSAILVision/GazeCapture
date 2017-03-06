@@ -12,7 +12,9 @@ end
 
 subjectDirs = dir(baseDirectory);
 for currSubject = subjectDirs'
-    if ~currSubject.isdir || currSubject.name(1) == '.'
+    % Valid subject directories have five-digit numbers.
+    if ~currSubject.isdir || length(currSubject.name) ~= 5 || ...
+            ~all(isstrprop(currSubject.name, 'digit'))
         continue;
     end
     disp(['Processing subject ' currSubject.name '...'])
