@@ -17,7 +17,7 @@ Any necessary changes to the dataset will be documented here.
 * **March 2017**: Original code, dataset and models released.
 
 ## Usage
-Usage of this dataset (including all data, models, and code) is subject to the associated license, found in [LICENSE.md](LICENSE.md). The license permits the use of released code, dataset and models for research use only.
+Usage of this dataset (including all data, models, and code) is subject to the associated license, found in [LICENSE.md](LICENSE.md). The license permits the use of released code, dataset and models for research purposes only.
 
 We also ask that you cite the associated paper if you make use of this dataset; following is the BibTeX entry:
 
