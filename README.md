@@ -1,7 +1,7 @@
-# Eye Tracking for Everyone Dataset Release
+# Eye Tracking for Everyone Code, Dataset and Models
 
 ## Introduction
-This is the README file for the official dataset release associated with the 2016 CVPR paper, "Eye Tracking for Everyone" by *Kyle Krafka, Aditya Khosla, Petr Kellnhofer, Harini Kannan, Suchendra Bhandarkar, Wojciech Matusik, and Antonio Torralba*.
+This is the README file for the official code, dataset and model release associated with the 2016 CVPR paper, "Eye Tracking for Everyone".
 
 The dataset release is broken up into three parts:
 
@@ -14,12 +14,10 @@ Continue reading for more information on each part.
 ## History
 Any necessary changes to the dataset will be documented here.
 
-* **March 2017**: Original dataset release.
+* **March 2017**: Original code, dataset and models released.
 
 ## Usage
-Usage of this dataset (including all data, models, and code) is subject to the associated license, found in [LICENSE.md](LICENSE.md). 
-
-[![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](http://creativecommons.org/licenses/by-nc-sa/4.0/)
+Usage of this dataset (including all data, models, and code) is subject to the associated license, found in [LICENSE.md](LICENSE.md). The license permits the use of released code, dataset and models for research use only.
 
 We also ask that you cite the associated paper if you make use of this dataset; following is the BibTeX entry:
 
@@ -108,4 +106,5 @@ We provide some sample code to help you get started using the dataset. Below is 
 Please feel free to contact us if you find any issues with these scripts or would like to request any additional code.
 
 ## Contact
-Questions related to this dataset may be emailed to [gazecapture@gmail.com](mailto:gazecapture@gmail.com).
+
+Please email any questions or comments to [gazecapture@gmail.com](mailto:gazecapture@gmail.com).
