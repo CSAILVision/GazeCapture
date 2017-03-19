@@ -1,8 +1,8 @@
 ### Copyright (c) 2017 - Kyle Krafka, Aditya Khosla, Aditya Khosla, Petr Kellnhofer, Harini Kannan, Suchendra Bhandarkar, Wojciech Matusik, and Antonio Torralba.
 
-## LICENSE AGREEMENT FOR RESEARCH USE OF GAZECAPTURE DATABASE AND ITRACKER MODELS
+## LICENSE AGREEMENT FOR USE OF GAZECAPTURE DATABASE AND ITRACKER MODELS
 
-By exercising the Licensed Rights (defined below), You accept and agree to be bound by the terms and conditions of this License Agreement for Research Use of GazeCapture Database and iTracker Models ("Research License"). To the extent this Research License may be interpreted as a contract, You are granted the rights mentioned below in consideration of Your acceptance of these terms and conditions, and the Licensor grants You such rights in consideration of benefits the Licensor receives from making the Licensed Material available under these terms and conditions.
+By exercising the Licensed Rights (defined below), You accept and agree to be bound by the terms and conditions of this License Agreement for Use of GazeCapture Database and iTracker Models ("Research License"). To the extent this Research License may be interpreted as a contract, You are granted the rights mentioned below in consideration of Your acceptance of these terms and conditions, and the Licensor grants You such rights in consideration of benefits the Licensor receives from making the Licensed Material available under these terms and conditions.
 
 ### Section 1 – Definitions
 
