@@ -37,7 +37,7 @@ By exercising the Licensed Rights (defined below), You accept and agree to be bo
  
  c. The disclaimer of warranties and limitation of liability provided above shall be interpreted in a manner that, to the extent possible, most closely approximates an absolute disclaimer and waiver of all liability.
  
-### Section 4 – Term and Termination.
+### Section 4 – Term and Termination
  a. If You fail to comply with this Research License, then Your rights under this Research License terminate automatically.
  
  b. Where Your right to use the Licensed Material has terminated under Section 4(a), it reinstates:
@@ -52,13 +52,13 @@ By exercising the Licensed Rights (defined below), You accept and agree to be bo
 
 d. Sections 1, 3, 4, 5 and 6 survive termination of this Research License.
 
-### Section 5 – Other Terms and Conditions.
+### Section 5 – Other Terms and Conditions
 
  a. The Licensor shall not be bound by any additional or different terms or conditions communicated by You unless expressly agreed.
  
  b. Any arrangements, understandings, or agreements regarding the Licensed Material not stated herein are separate from and independent of the terms and conditions of this Research License.
  
-### Section 6 – Interpretation.
+### Section 6 – Interpretation
 
  a. For the avoidance of doubt, this Research License does not, and shall not be interpreted to, reduce, limit, restrict, or impose conditions on any use of the Licensed Material that could lawfully be made without permission under this Research License.
  
