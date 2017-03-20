@@ -1,4 +1,4 @@
-### Copyright (c) 2017 - Kyle Krafka, Aditya Khosla, Aditya Khosla, Petr Kellnhofer, Harini Kannan, Suchendra Bhandarkar, Wojciech Matusik, and Antonio Torralba.
+### Copyright (c) 2017 - Kyle Krafka, Aditya Khosla, Petr Kellnhofer, Harini Kannan, Suchendra Bhandarkar, Wojciech Matusik, and Antonio Torralba.
 
 ## LICENSE AGREEMENT FOR USE OF GAZECAPTURE DATABASE AND ITRACKER MODELS
 
