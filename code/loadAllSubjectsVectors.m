@@ -18,7 +18,7 @@ if exist('baseDirectory', 'var') || exist('currSubject', 'var') || ...
 end
 
 %% Configuration.
-baseDirectory = '~/Desktop/release_meta/';
+baseDirectory = '/path/to/data';
 
 %% Initialize variables.
 
