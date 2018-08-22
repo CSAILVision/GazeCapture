@@ -72,7 +72,7 @@ def main():
     if doLoad:
         saved = load_checkpoint()
         if saved:
-            print('Loading checkpoint for epoch %05d with error %.5f...' % (saved['epoch'], saved['best_prec1']))
+            print('Loading checkpoint for epoch %05d with loss %.5f (which is L2 = mean of squares)...' % (saved['epoch'], saved['best_prec1']))
             state = saved['state_dict']
             try:
                 model.module.load_state_dict(state)
@@ -221,7 +221,7 @@ def validate(val_loader, model, criterion, epoch):
         lossLin = torch.sum(lossLin,1)
         lossLin = torch.mean(torch.sqrt(lossLin))
 
-        losses.update(oss.data[0], imFace.size(0))
+        losses.update(loss.data[0], imFace.size(0))
         lossesLin.update(lossLin.data[0], imFace.size(0))
      
         # compute gradient and do SGD step
