@@ -15,7 +15,7 @@ Implemented by Petr Kellnhofer ( https://people.csail.mit.edu/pkellnho/ ). Refer
 ### Dataset preparation
 
 1. Download the GazeCapture dataset from http://gazecapture.csail.mit.edu/download.php
-2. Extract the files (including the sub-archives) to folder A. The resulting structure should be something like:
+2. Extract the files (including the sub-archives) to a folder A. The resulting structure should be something like this:
 ```
 GazeCapture
 \--00002
@@ -62,7 +62,7 @@ python main.py --data_path [path B] --sink
 ## History
 Any necessary changes to the dataset will be documented here.
 
-* **January 2019**: Dataset preprocessing code for easier deployment. Conversion to pytorch 0.4.1.
+* **January 2019**: A dataset preprocessing code for an easier deployment. A conversion to pytorch 0.4.1.
 * **March 2018**: Original code release.
 
 ## Terms
