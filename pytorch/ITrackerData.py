@@ -10,7 +10,7 @@ import re
 
 '''
 Data loader for the iTracker.
-Modify to fit your data format.
+Use prepareDataset.py to convert the dataset from http://gazecapture.csail.mit.edu/ to proper format.
 
 Author: Petr Kellnhofer ( pkel_lnho (at) gmai_l.com // remove underscores and spaces), 2018. 
 
@@ -31,9 +31,7 @@ Booktitle = {IEEE Conference on Computer Vision and Pattern Recognition (CVPR)}
 
 '''
 
-DATASET_PATH = '[NOT SET]'
 MEAN_PATH = './'
-META_PATH = './metadata.mat'
 
 def loadMetadata(filename, silent = False):
     try:
@@ -51,7 +49,7 @@ class SubtractMean(object):
     """
 
     def __init__(self, meanImg):
-        self.meanImg = transforms.ToTensor()(meanImg)
+        self.meanImg = transforms.ToTensor()(meanImg / 255)
 
     def __call__(self, tensor):
         """
@@ -64,30 +62,37 @@ class SubtractMean(object):
 
 
 class ITrackerData(data.Dataset):
-    def __init__(self, split = 'train', imSize=(224,224), gridSize=(25, 25)):
+    def __init__(self, dataPath, split = 'train', imSize=(224,224), gridSize=(25, 25)):
 
+        self.dataPath = dataPath
         self.imSize = imSize
         self.gridSize = gridSize
 
         print('Loading iTracker dataset...')
-        self.metadata = loadMetadata(META_PATH)
+        metaFile = os.path.join(dataPath, 'metadata.mat')
+        #metaFile = 'metadata.mat'
+        if metaFile is None or not os.path.isfile(metaFile):
+            raise RuntimeError('There is no such file %s! Provide a valid dataset path.' % metaFile)
+        self.metadata = loadMetadata(metaFile)
+        if self.metadata is None:
+            raise RuntimeError('Could not read metadata file %s! Provide a valid dataset path.' % metaFile)
+
         self.faceMean = loadMetadata(os.path.join(MEAN_PATH, 'mean_face_224.mat'))['image_mean']
         self.eyeLeftMean = loadMetadata(os.path.join(MEAN_PATH, 'mean_left_224.mat'))['image_mean']
         self.eyeRightMean = loadMetadata(os.path.join(MEAN_PATH, 'mean_right_224.mat'))['image_mean']
         
-
         self.transformFace = transforms.Compose([
-            transforms.Scale(self.imSize),
+            transforms.Resize(self.imSize),
             transforms.ToTensor(),
             SubtractMean(meanImg=self.faceMean),
         ])
         self.transformEyeL = transforms.Compose([
-            transforms.Scale(self.imSize),
+            transforms.Resize(self.imSize),
             transforms.ToTensor(),
             SubtractMean(meanImg=self.eyeLeftMean),
         ])
         self.transformEyeR = transforms.Compose([
-            transforms.Scale(self.imSize),
+            transforms.Resize(self.imSize),
             transforms.ToTensor(),
             SubtractMean(meanImg=self.eyeRightMean),
         ])
@@ -129,9 +134,9 @@ class ITrackerData(data.Dataset):
     def __getitem__(self, index):
         index = self.indices[index]
 
-        imFacePath = os.path.join(DATASET_PATH, '%05d/appleFace/%05d.jpg' % (self.metadata['labelRecNum'][index], self.metadata['frameIndex'][index]))
-        imEyeLPath = os.path.join(DATASET_PATH, '%05d/appleLeftEye/%05d.jpg' % (self.metadata['labelRecNum'][index], self.metadata['frameIndex'][index]))
-        imEyeRPath = os.path.join(DATASET_PATH, '%05d/appleRightEye/%05d.jpg' % (self.metadata['labelRecNum'][index], self.metadata['frameIndex'][index]))
+        imFacePath = os.path.join(self.dataPath, '%05d/appleFace/%05d.jpg' % (self.metadata['labelRecNum'][index], self.metadata['frameIndex'][index]))
+        imEyeLPath = os.path.join(self.dataPath, '%05d/appleLeftEye/%05d.jpg' % (self.metadata['labelRecNum'][index], self.metadata['frameIndex'][index]))
+        imEyeRPath = os.path.join(self.dataPath, '%05d/appleRightEye/%05d.jpg' % (self.metadata['labelRecNum'][index], self.metadata['frameIndex'][index]))
 
         imFace = self.loadImage(imFacePath)
         imEyeL = self.loadImage(imEyeLPath)

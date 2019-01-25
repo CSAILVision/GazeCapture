@@ -1,4 +1,4 @@
-import math, shutil, os, time
+import math, shutil, os, time, argparse
 import numpy as np
 import scipy.io as sio
 
@@ -37,13 +37,26 @@ Booktitle = {IEEE Conference on Computer Vision and Pattern Recognition (CVPR)}
 
 '''
 
+def str2bool(v):
+    if v.lower() in ('yes', 'true', 't', 'y', '1'):
+        return True
+    elif v.lower() in ('no', 'false', 'f', 'n', '0'):
+        return False
+    else:
+        raise argparse.ArgumentTypeError('Boolean value expected.')
+
+parser = argparse.ArgumentParser(description='iTracker-pytorch-Trainer.')
+parser.add_argument('--data_path', help="Path to processed dataset. It should contain metadata.mat. Use prepareDataset.py.")
+parser.add_argument('--sink', type=str2bool, nargs='?', const=True, default=False, help="Just sink and terminate.")
+parser.add_argument('--reset', type=str2bool, nargs='?', const=True, default=False, help="Start from scratch (do not load).")
+args = parser.parse_args()
 
 # Change there flags to control what happens.
-doLoad = True # Load checkpoint at the beginning
-doTest = True # Only run test, no training
+doLoad = not args.reset # Load checkpoint at the beginning
+doTest = args.sink # Only run test, no training
 
-workers = 8
-epochs = 100
+workers = 16
+epochs = 25
 batch_size = torch.cuda.device_count()*100 # Change if out of cuda memory
 
 base_lr = 0.0001
@@ -72,7 +85,7 @@ def main():
     if doLoad:
         saved = load_checkpoint()
         if saved:
-            print('Loading checkpoint for epoch %05d with loss %.5f (which is L2 = mean of squares)...' % (saved['epoch'], saved['best_prec1']))
+            print('Loading checkpoint for epoch %05d with loss %.5f (which is the mean squared error not the actual linear error)...' % (saved['epoch'], saved['best_prec1']))
             state = saved['state_dict']
             try:
                 model.module.load_state_dict(state)
@@ -81,11 +94,11 @@ def main():
             epoch = saved['epoch']
             best_prec1 = saved['best_prec1']
         else:
-            print('Warning: Could not read checkpoint!');
+            print('Warning: Could not read checkpoint!')
 
     
-    dataTrain = ITrackerData(split='train', imSize = imSize)
-    dataVal = ITrackerData(split='test', imSize = imSize)
+    dataTrain = ITrackerData(dataPath = args.data_path, split='train', imSize = imSize)
+    dataVal = ITrackerData(dataPath = args.data_path, split='test', imSize = imSize)
    
     train_loader = torch.utils.data.DataLoader(
         dataTrain,
@@ -152,18 +165,18 @@ def train(train_loader, model, criterion,optimizer, epoch):
         faceGrid = faceGrid.cuda(async=True)
         gaze = gaze.cuda(async=True)
         
-        imFace = torch.autograd.Variable(imFace)
-        imEyeL = torch.autograd.Variable(imEyeL)
-        imEyeR = torch.autograd.Variable(imEyeR)
-        faceGrid = torch.autograd.Variable(faceGrid)
-        gaze = torch.autograd.Variable(gaze)
+        imFace = torch.autograd.Variable(imFace, requires_grad = True)
+        imEyeL = torch.autograd.Variable(imEyeL, requires_grad = True)
+        imEyeR = torch.autograd.Variable(imEyeR, requires_grad = True)
+        faceGrid = torch.autograd.Variable(faceGrid, requires_grad = True)
+        gaze = torch.autograd.Variable(gaze, requires_grad = False)
 
         # compute output
         output = model(imFace, imEyeL, imEyeR, faceGrid)
 
         loss = criterion(output, gaze)
         
-        losses.update(loss.data[0], imFace.size(0))
+        losses.update(loss.data.item(), imFace.size(0))
 
         # compute gradient and do SGD step
         optimizer.zero_grad()
@@ -205,14 +218,15 @@ def validate(val_loader, model, criterion, epoch):
         faceGrid = faceGrid.cuda(async=True)
         gaze = gaze.cuda(async=True)
         
-        imFace = torch.autograd.Variable(imFace, volatile = True)
-        imEyeL = torch.autograd.Variable(imEyeL, volatile = True)
-        imEyeR = torch.autograd.Variable(imEyeR, volatile = True)
-        faceGrid = torch.autograd.Variable(faceGrid, volatile = True)
-        gaze = torch.autograd.Variable(gaze, volatile = True)
+        imFace = torch.autograd.Variable(imFace, requires_grad = False)
+        imEyeL = torch.autograd.Variable(imEyeL, requires_grad = False)
+        imEyeR = torch.autograd.Variable(imEyeR, requires_grad = False)
+        faceGrid = torch.autograd.Variable(faceGrid, requires_grad = False)
+        gaze = torch.autograd.Variable(gaze, requires_grad = False)
 
         # compute output
-        output = model(imFace, imEyeL, imEyeR, faceGrid)
+        with torch.no_grad():
+            output = model(imFace, imEyeL, imEyeR, faceGrid)
 
         loss = criterion(output, gaze)
         
@@ -221,8 +235,8 @@ def validate(val_loader, model, criterion, epoch):
         lossLin = torch.sum(lossLin,1)
         lossLin = torch.mean(torch.sqrt(lossLin))
 
-        losses.update(loss.data[0], imFace.size(0))
-        lossesLin.update(lossLin.data[0], imFace.size(0))
+        losses.update(loss.data.item(), imFace.size(0))
+        lossesLin.update(lossLin.item(), imFace.size(0))
      
         # compute gradient and do SGD step
         # measure elapsed time

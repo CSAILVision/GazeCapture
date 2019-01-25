@@ -10,12 +10,62 @@ It is a simplified version without fine tuning and augmentations which may resul
 
 Implemented by Petr Kellnhofer ( https://people.csail.mit.edu/pkellnho/ ). Refer to the main repository https://github.com/CSAILVision/GazeCapture for more info.
 
+## How to use:
+
+### Dataset preparation
+
+1. Download the GazeCapture dataset from http://gazecapture.csail.mit.edu/download.php
+2. Extract the files (including the sub-archives) to folder A. The resulting structure should be something like:
+```
+GazeCapture
+\--00002
+    \--frames
+    \--appleFace.json
+\--00003
+```
+3. Process the dataset using prepareDataset.py:
+```
+python prepareDataset.py --dataset_path [A = where extracted] --output_path [B = where to save new data]
+```
+It should output:
+````
+======================
+        Summary
+======================
+Total added 1490959 frames from 1471 recordings.
+There are no missing files.
+There are no extra files that were not in the reference dataset.
+The new metadata.mat is an exact match to the reference from GitHub (including ordering)
+````
+and create a file structure in the directory B:
+```
+\---00002
+    \---appleFace
+        \---00000.jpg
+    \---appleLeftEye
+    \---appleRightEye   
+\---00003
+...
+\---metadata.mat
+```
+
+### Training
+```
+python main.py --data_path [path B] --reset
+```
+
+### Testing
+```
+python main.py --data_path [path B] --sink
+```
+
 ## History
 Any necessary changes to the dataset will be documented here.
 
+* **January 2019**: Dataset preprocessing code for easier deployment. Conversion to pytorch 0.4.1.
 * **March 2018**: Original code release.
 
-## Usage
+## Terms
 Usage of this dataset (including all data, models, and code) is subject to the associated license, found in [LICENSE.md](LICENSE.md). The license permits the use of released code, dataset and models for research purposes only.
 
 We also ask that you cite the associated paper if you make use of this dataset; following is the BibTeX entry:
@@ -31,14 +81,14 @@ Booktitle = {IEEE Conference on Computer Vision and Pattern Recognition (CVPR)}
 
 ## Code
 
-Requires CUDA and Python 3+ with following packages (exact version may not be necessary):
+Requires CUDA and Python 3.6+ with following packages (exact version may not be necessary):
 
-* numpy (1.13.3)
-* Pillow (4.3.0)
-* torch (0.3.1.post2)
+* numpy (1.15.4)
+* Pillow (5.3.0)
+* torch (0.4.1)
 * torchfile (0.1.0)
-* torchvision (0.2.0)
-* scipy (0.19.0)
+* torchvision (0.2.1)
+* scipy (1.1.0)
 
 
 ## Contact
