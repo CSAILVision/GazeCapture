@@ -83,12 +83,12 @@ Booktitle = {IEEE Conference on Computer Vision and Pattern Recognition (CVPR)}
 
 Requires CUDA and Python 3.6+ with following packages (exact version may not be necessary):
 
-* numpy (1.15.4)
-* Pillow (5.3.0)
-* torch (0.4.1)
+* numpy (1.16.4)
+* Pillow (6.1.0)
+* torch (1.1.0)
 * torchfile (0.1.0)
-* torchvision (0.2.1)
-* scipy (1.1.0)
+* torchvision (0.3.0a0)
+* scipy (1.3.0)
 
 
 ## Contact
