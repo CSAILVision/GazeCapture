@@ -1,2 +1,50 @@
 /pytorch/__pycache__/*.pyc
 /pytorch/__pycache__
+
+# Poetry
+/pytorch/poetry.lock
+/pytorch/dist/
+/pytorch/.venv/
+
+# Testing
+/pytorch/.pytest_cache/
+/pytorch/.coverage
+/pytorch/htmlcov/
+/pytorch/coverage.xml
+/pytorch/*.coverage
+/pytorch/.hypothesis/
+
+# Claude settings
+.claude/*
+
+# Build artifacts
+/pytorch/build/
+/pytorch/*.egg-info/
+/pytorch/*.egg
+
+# Virtual environments
+/pytorch/venv/
+/pytorch/env/
+/pytorch/ENV/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Python
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# mypy
+/pytorch/.mypy_cache/
+/pytorch/.dmypy.json
+/pytorch/dmypy.json
